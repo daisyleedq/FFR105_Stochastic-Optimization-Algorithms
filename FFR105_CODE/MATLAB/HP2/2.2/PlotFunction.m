@@ -60,6 +60,7 @@ function [minimaPlotHand] = PlotFunction(positions, axisRange, minimaPositions, 
     set(gca,'Fontsize',10)
     xlabel('x','FontSize',20)
     ylabel('y','FontSize',20)
+    ylabel('f(x,y)','FontSize',20)
     colorbar();
     view(80, 45);
     set(figureSurface, 'Position', [0,50,600,600]);
@@ -84,7 +85,7 @@ function [minimaPlotHand] = PlotFunction(positions, axisRange, minimaPositions, 
     set(gca,'Fontsize',10)
     xlabel('x','FontSize',10)
     ylabel('y','FontSize',20)
-    set(figureContour, 'Position', [650,50,600,600]);
+    set(figureContour, 'Position', [620,50,900,700]);
     
     contour(positionsGridX,positionsGridY,logFunctionValues)
     
@@ -105,11 +106,11 @@ function [minimaPlotHand] = PlotFunction(positions, axisRange, minimaPositions, 
     
     if (isempty(minimaPositions) == false && isempty(minimaValues) == false)
         dataOutput = [minimaPositions(:,1) minimaPositions(:,2) minimaValues]';
-        stringFormat = 'f(%4.6f, %4.6f) = %4.6f\n';
+        stringFormat = 'f(%4.6f, %4.6f) = %4.2f\n';
         nMinima = size(minimaValues,1);
         for i=1:nMinima
-            string = sprintf(stringFormat,dataOutput(i,:));
-            text(minimaPositions(i,1), minimaPositions(i,2)*1.1,string);
+            string = sprintf(stringFormat,dataOutput(:,i));
+            text(minimaPositions(i,1)*1.13, minimaPositions(i,2)*1.13,string);
         end
     end
     

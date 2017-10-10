@@ -1,10 +1,10 @@
 %% HP2 - PROBLEM 2.3
-% In this problem you will develop an intelligent system for braking heavy-duty trucks during
-% complicated descents (see pp. 83-86 in the course book). Such trucks are equipped with several
-% braking systems, including the ordinary pedal brakes (also called foundation brakes), engine
-% brakes, retarder etc. In order for the (foundation) brakes to work properly, the brake discs
-% must never be overheated. Here, we will use a strongly simplified model of a truck, which will
-% now be described.
+%% In this problem you will develop an intelligent system for braking heavy-duty trucks during
+complicated descents (see pp. 83-86 in the course book). Such trucks are equipped with several
+braking systems, including the ordinary pedal brakes (also called foundation brakes), engine
+brakes, retarder etc. In order for the (foundation) brakes to work properly, the brake discs
+must never be overheated. Here, we will use a strongly simplified model of a truck, which will
+now be described.
 %%
 
 clear all, close all, clc, clf
