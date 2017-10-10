@@ -108,8 +108,8 @@ function [minimaPlotHand] = PlotFunction(positions, axisRange, minimaPositions, 
         stringFormat = 'f(%4.6f, %4.6f) = %4.6f\n';
         nMinima = size(minimaValues,1);
         for i=1:nMinima
-            string = sprintf(stringFormat,dataOutput(i,:));
-            text(minimaPositions(i,1), minimaPositions(i,2)*1.1,string);
+        string = sprintf(stringFormat,dataOutput(i,:));
+        text(minimaPositions(i,1), minimaPositions(i,2)*1.1,string);
         end
     end
     

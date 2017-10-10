@@ -18,21 +18,21 @@ function [positionsSwarmBest, evaluationBestEver] = ParticleSwarmOptimization(nG
         alpha = 1;
         deltaT = 1;
         % * cognitive component : measures the degree of self-confidence of a
-        % particle, i.e. the degree to which it trusts its own previous 
+        % particle, i.e. the degree to which it trusts its own previous
         % performance as a guide towards obtaining better results
-        % * social component measures a particle’s trust in the ability of 
+        % * social component measures a particle’s trust in the ability of
         % the other swarm members to find better candidate solutions
         componentCognitive=2; %based on table 5.1 in BIOM book (small S.D.)
         componentSocial=2; %based on table 5.1 in BIOM book (small S.D.)
         
-        % BIOM p. 128. : Thus, a common strategy is to start with a value 
-        % larger than 1 (w = 1.4, say), and then reduce w by a constant 
+        % BIOM p. 128. : Thus, a common strategy is to start with a value
+        % larger than 1 (w = 1.4, say), and then reduce w by a constant
         % factor ? ?]0, 1[ (typically very close to 1) in each iteration,
-        % until w reaches a lower bound (typically around 0.3–0.4). 
+        % until w reaches a lower bound (typically around 0.3–0.4).
         inertiaWeight = 1.4;
         inertiaWeightMin = 0.35;
         inertiaWeightDecrementFactor = 0.99; %beta
-
+        
         doPlot = true;
     end
     
@@ -99,10 +99,11 @@ function [positionsSwarmBest, evaluationBestEver] = ParticleSwarmOptimization(nG
         
     end
     
-    disp('Best position found')
-    disp(round(positionsSwarmBest))
-    disp('with function value')
-    disp(evaluationBestEver)
-    
+    if nargin == 0
+        disp('Best position found')
+        disp(round(positionsSwarmBest))
+        disp('with function value')
+        disp(evaluationBestEver)
+    end
     
 end
