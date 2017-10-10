@@ -1,0 +1,8 @@
+function [xj] = NewtonRaphsonStep(xi,dotfi,ddotfi)
+
+dotYi = Polynomial(xi, dotfi);
+ddotYi = Polynomial(xi, ddotfi);
+
+xj = xi - dotfxi / ddotfxi;
+
+end

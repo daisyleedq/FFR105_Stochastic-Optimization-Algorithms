@@ -1,0 +1,41 @@
+
+\documentclass{report}
+\usepackage[utf8]{inputenc}
+\usepackage{amsmath}
+\usepackage{import}
+\usepackage{titlesec}
+\usepackage{graphicx}
+\usepackage{float}
+\usepackage{geometry}
+ \geometry{
+ a4paper,
+ total={170mm,257mm},
+ left=20mm,
+ top=20mm,
+ }
+ \usepackage{subfiles}
+
+\titleformat{\chapter}{\normalfont\huge\bf}{\thechapter.}{20pt}{\huge\bf}
+
+
+\begin{document}
+
+
+\title{Homework Problems 1 - Report}
+\author{Name: Robert Grzelka, Personnumber: 911009C759}
+\date{September 2017}
+
+\maketitle
+ 
+\tableofcontents
+
+\subfile{Chapter1.tex}
+\subfile{Chapter2.tex}
+\subfile{Chapter3.tex}
+
+
+\end{document}
+
+
+
+

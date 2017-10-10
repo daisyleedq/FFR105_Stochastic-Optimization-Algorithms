@@ -1,0 +1,260 @@
+\documentclass[main.tex]{subfiles}
+
+\begin{document}
+
+\chapter{Problem 1.3 - Basic GA program}
+
+\section{Numerical solution}
+\subsection{Problem Description}
+
+To finish this task, one wrote a standard genetic algorithm (GA) using (some of) the components described in Sect. 3.2.1 of the course book. Also used was the Matlab program written during the Matlab introduction with some modifications. In addition to writing the main program (FunctionOptimization.m), this task included writing Matlab functions (placed in separate M-ﬁles) for
+\begin{enumerate}
+\item initializing a population (InitializePopulation),
+\item decoding a (binary) chromosome (DecodeChromosome),
+\item evaluating an individual (EvaluateIndividual),
+\item selecting individuals with tournament selection (TournamentSelect),
+\item carrying out crossover (Cross),
+\item carrying out mutations (Mutate).
+\item carrying out elitism (InsertBestIndividual)
+\end{enumerate}
+
+A version of each of these functions (except the one handling elitism, see below) was already implemented during the Matlab introduction. However, for this problem functions were generalized in some cases.
+
+\subsection{Program Metodology}
+
+To get accustomed with genetic algorithms, one had chosen ranges of parameters which were set in nested for loops for each main program run. Every each run for given parameters set was repeated 20 times for different random seed to gain average of run. From this runs were acquired parameter sets that for given problem gave averaged maximum/minimum fitness of generation and average maximum/minimum mean fitness of generation. For each of this 4 sets of parameters, runs were repeated separately to check if it is possible to gain similar scores.
+
+\subsection{Hardcoded Input Parameters}
+
+Input hardcoded parameters are as follows:\\
+nCopiesBestIndividual = 2;\\
+nVariables = 2;\\%# variables in function\\
+nPopulations = [40 80];\\ %# chromosomes\\
+nGenes = 25;\\ %# bits for chromosome\\
+crossoverProbabilities = [0.3 0.5 0.7];\\
+mutationProbabilities = [0.025 0.05 0.075];\\
+tournamentSelectionParameters = [0.2 0.5 0.8];\\
+nTournaments = [2 4 6];\\
+variablesRange = 5.0;\\
+nGenerations = 100;\\
+doPlot = true;\\
+doPrint = true;\\
+nAveragingRuns = 3;\\
+
+Where for nPopulations, crossoverProbabilities, mutationProbabilities, tournamentSelectionParameters, nTournaments runs were performed in nested for loop. Total number of runs was $2*3*3*3*3*20 = 3240$.
+
+\subsection{Program Instruction}
+
+To run program, simply open Matlab go to EvolutionaryAlgorithm directory and then run script FunctionOptimization without any changes in file due to hardcoded parameters. To see previously found best solutions one may change top settings to be: $doRunOnlyTest=false$; and $doRunOnlyForPrecalculatedSolutions=true$, what will allow to read all saved solutions and pick best/worst ones.
+
+Typical output of program is like
+
+
+\begin{quote}
+*** *** *** *** ***  .:: SOLUTION no. (-1), title 'test run' ::. \\
+... parameters : \\
+... ... population size = 80, crossover probab. = 0.5, mutation probab. = 0.025,\\
+... ... tournament selection param. = 0.8, tournament size = 6\\
+... results : avg/max fitness = 0.236/0.333, f(x1=-0.000, x2=-1.000) = 3.000\\
+\end{quote}
+
+\newpage
+\subsection{Results}
+
+From 3240 runs the best/worst and best/worst average solutions were found and rerun. Tables below shows sets of input parameters corresponding to this solutions.
+
+\begin{table}[H]
+\centering
+\caption{Worst solution (averaged over 20 runs for given set of parameters), \n average/max fitness (of final generation) = 0.001/0.012}
+\begin{tabular}{l | c  }
+parameter & parameter value \\
+\hline \hline
+population size               &	40 \\
+crossover probability         &	0.5\\
+mutation probability          &	0.025\\
+tournament selection parameter&	0.2\\
+tournament size               &	2\\
+\end{tabular}
+\end{table}
+\begin{table}[H]
+\centering
+\caption{Worst average solution (averaged over 20 runs for given set of parameters), \n average/max fitness (of final generation) = 0.005/0.188}
+\begin{tabular}{l | c  }
+parameter & parameter value \\
+\hline \hline
+population size               &	80 \\
+crossover probability         &	0.5\\
+mutation probability          &	0.025\\
+tournament selection parameter&	0.2\\
+tournament size               &	2\\
+\end{tabular}
+\end{table}
+\begin{table}[H]
+\centering
+\caption{Best average solution (averaged over 20 runs for given set of parameters), \n average/max fitness (of final generation) = 0.264/0.333}
+\begin{tabular}{l | c  }
+parameter & parameter value \\
+\hline \hline
+population size               &	80 \\
+crossover probability         &	0.5\\
+mutation probability          &	0.025\\
+tournament selection parameter&	0.8\\
+tournament size               &	6\\
+\end{tabular}
+\end{table}
+
+\begin{table}[H]
+\centering
+\caption{Best solution (averaged over 20 runs for given set of parameters), \n average/max fitness (of final generation) = 0.160/0.333}
+\begin{tabular}{l | c  }
+parameter & parameter value \\
+\hline \hline
+population size               &	80 \\
+crossover probability         &	0.3\\
+mutation probability          &	0.05\\
+tournament selection parameter&	0.8\\
+tournament size               &	6\\
+\end{tabular}
+\end{table}
+
+
+From best solution and best average solution one may see that stationary point of objective function $g(\vec{x})$ is (0,-1), and global minima in this point have a value $3.0$.
+
+\newpage
+
+\includegraphics[width=\textwidth]{}
+
+\includegraphics[width=\textwidth]{EvolutionaryAlgorithm/{GeneticAlgorithm_solution(99)_fitness_title(best-solution)}.png}
+\includegraphics[width=\textwidth]{EvolutionaryAlgorithm/{GeneticAlgorithm_solution(99)_surface_title(best-solution)}.png}
+\newpage
+
+\includegraphics[width=\textwidth]{EvolutionaryAlgorithm/{GeneticAlgorithm_solution(117)_fitness_title(best-average-solution)}.png}
+\includegraphics[width=\textwidth]{EvolutionaryAlgorithm/{GeneticAlgorithm_solution(117)_surface_title(best-average-solution)}.png}
+\newpage
+
+\includegraphics[width=\textwidth]{EvolutionaryAlgorithm/{GeneticAlgorithm_solution(28)_fitness_title(worst-solution)}.png}
+\includegraphics[width=\textwidth]{EvolutionaryAlgorithm/{GeneticAlgorithm_solution(28)_surface_title(worst-solution)}.png}
+\newpage
+
+\includegraphics[width=\textwidth]{EvolutionaryAlgorithm/{GeneticAlgorithm_solution(109)_fitness_title(worst-average-solution)}.png}
+\includegraphics[width=\textwidth]{EvolutionaryAlgorithm/{GeneticAlgorithm_solution(109)_surface_title(worst-average-solution)}.png}
+\newpage
+
+
+\subsection{Conclusions}
+
+It may be seen, that for bigger values of tournament size (6) and tournament selection parameters (0.8), with low crossover probability (0.3) and medium in sequence mutation probability (0.05), one will get best solution. Best average is achieved for similar parameters with exception of lower mutation probability (0.025)  and higher crossover probability (0.3). Worst solution is when tournament input settings are low.
+
+\section{Analytical solution}
+
+Given objective function 
+\begin{equation}
+\begin{split}
+g(\vec{x})  &  = (1 + (x_1 + x_2 + 1)^2 * (19 - 14x_1 + 3x_2 - 14x_2 + 6x_1x_2 + 3x_2^2)) * \\
+       & * (30 + (2x_1 - 3x_2)^2 * (18 - 32x_1 + 12x_1^2 + 48x_2 - 36x_1x_2 + 27x_2^2)) \\
+\end{split}
+\end{equation}
+which could be rewritten as product of two binomial functions
+\begin{equation}
+    g(\vec{x}) = A(\vec{x})*B(\vec{x})
+\end{equation}
+and each of this functions may be treated separately as other functions products
+\begin{equation}
+\begin{split}
+    A(\vec{x}) & = 1 + a(\vec{x})*c(\vec{x})\\
+    B(\vec{x}) & = 30 + b(\vec{x})*d(\vec{x})\\
+    \end{split}
+\end{equation}
+Finally objective function may be formed as 
+\begin{equation}
+    g(\vec{x}) = (1 + a(\vec{x})*c(\vec{x}))*( 30 + b(\vec{x})*d(\vec{x}))
+\end{equation}
+
+To prove that point (0,-1) is stationary point with $g(\vec{x})$ having minima value (=3) in this point, easiest is to derive gradient of function then compare it to zero
+\begin{equation}
+        \nabla{g(\vec{x})} = \left(g_{x_1}'(\vec{x}), g_{x_2}'(\vec{x})\right) = \left(\frac{\partial{g(\vec{x})} }{\partial{x_1}},
+        \frac{\partial{g(\vec{x})} }{\partial{x_1}}\right) = 0
+\end{equation}
+
+Following function product rule in nested way first partial derivative over will be
+\begin{equation}
+    g'(\vec{x}) = A'(\vec{x})*B(\vec{x}) + A(\vec{x})*B'(\vec{x})
+\end{equation}
+and for derivative terms
+\begin{equation}
+\begin{split}
+    A'(\vec{x}) & = a'(\vec{x})*c(\vec{x}) + a(\vec{x})*c'(\vec{x})\\
+    B'(\vec{x}) & = b'(\vec{x})*d(\vec{x}) + b(\vec{x})*d'(\vec{x})\\
+    \end{split}
+\end{equation}
+From this our long equation partial derivatives will be
+\begin{equation}
+\begin{split}
+    g_{x_1}'(\vec{x}) & = A_{x_1}'(\vec{x})*B_{x_1}(\vec{x}) + A_{x_1}(\vec{x})*B_{x_1}'(\vec{x}) =\\
+    & = (c_{x_1}'(\vec{x})*a_{x_1}(\vec{x}) + c_{x_1}(\vec{x})*a_{x_1}'(\vec{x})) * (b_{x_1}(\vec{x})*d_{x_1}(\vec{x}) + 30) + \\
+    &+ (a_{x_1}(\vec{x})*c_{x_1}(\vec{x})+1)*(b_{x_1}'(\vec{x})*d_{x_1}(\vec{x})+b_{x_1}(\vec{x})*d_{x_1}'(\vec{x}))\\
+    g_{x_2}'(\vec{x}) & = A_{x_2}'(\vec{x})*B_{x_2}(\vec{x}) + A_{x_2}(\vec{x})*B_{x_2}'(\vec{x}) =\\
+    & = (c_{x_2}'(\vec{x})*a_{x_2}(\vec{x}) + c_{x_2}(\vec{x})*a_{x_2}'(\vec{x})) * (b_{x_2}(\vec{x})*d_{x_2}(\vec{x}) + 30) + \\
+    &+ (a_{x_2}(\vec{x})*c_{x_2}(\vec{x})+1)*(b_{x_2}'(\vec{x})*d_{x_2}(\vec{x})+b_{x_2}(\vec{x})*d_{x_2}'(\vec{x}))\\\\
+    \end{split}
+\end{equation}
+After changing symbolical expressions of functions
+\begin{equation}
+    \begin{split}
+      g_{x_1}'(\vec{x}) & = ((6*x_1 + 6*x_2 - 14)*(x_1 + x_2 + 1)^2 + \\
+      & + (2*x_1 + 2*x_2 + 2)*(3*x_1^2 + 6*x_1*x_2 - 14*x_1 + 3*x_2^2 - 14*x_2 + 19))*\\
+      & * ((2*x_1 - 3*x_2)^2*(12*x_1^2 - 36*x_1*x_2 - 32*x_1 + 27*x_2^2 + 48*x_2 + 18) + 30) + \\
+      & + ((x_1 + x_2 + 1)^2*(3*x_1^2 + 6*x_1*x_2 - 14*x_1 + 3*x_2^2 - 14*x_2 + 19) + 1)*\\
+      & * ((8*x_1 - 12*x_2)*(12*x_1^2 - 36*x_1*x_2 - 32*x_1 + 27*x_2^2 + 48*x_2 + 18) -\\
+      & + (2*x_1 - 3*x_2)^2*(36*x_2 - 24*x_1 + 32))\\
+      g_{x_2}'(\vec{x}) & = ((6*x_1 + 6*x_2 - 14)*(x_1 + x_2 + 1)^2 + (2*x_1 + 2*x_2 + 2)* \\
+      & * (3*x_1^2 + 6*x_1*x_2 - 14*x_1 + 3*x_2^2 - 14*x_2 + 19))*\\
+      & * ((2*x_1 - 3*x_2)^2*(12*x_1^2 - 36*x_1*x_2 - 32*x_1 + 27*x_2^2 + 48*x_2 + 18) + 30) -\\
+      & + ((x_1 + x_2 + 1)^2*(3*x_1^2 + 6*x_1*x_2 - 14*x_1 + 3*x_2^2 - 14*x_2 + 19) + 1)*\\
+      & * ((12*x_1 - 18*x_2)*(12*x_1^2 - 36*x_1*x_2 - 32*x_1 + 27*x_2^2 + 48*x_2 + 18) -\\
+      & + (2*x_1 - 3*x_2)^2*(54*x_2 - 36*x_1 + 48))\\
+    \end{split}
+\end{equation}
+Substituting stationary point (0,-1) for roots of equation
+\begin{equation}
+    \begin{split}
+      g_{x_1}'(0,-1) & = ((6*0 + 6*(-1) - 14)*(0 + (-1) + 1)^2 + \\
+      & + (2*0 + 2*(-1) + 2)*(3*0^2 + 6*0*(-1) - 14*0 + 3*(-1)^2 - 14*(-1) + 19))*\\
+      & * ((2*0 - 3*(-1))^2*(12*0^2 - 36*0*(-1) - 32*0 + 27*(-1)^2 + 48*(-1) + 18) + 30) + \\
+      & + ((0 + (-1) + 1)^2*(3*0^2 + 6*0*(-1) - 14*0 + 3*(-1)^2 - 14*(-1) + 19) + 1)*\\
+      & * ((8*0 - 12*(-1))*(12*0^2 - 36*0*(-1) - 32*0 + 27*(-1)^2 + 48*(-1) + 18) -\\
+      & + (2*0 - 3*(-1))^2*(36*(-1) - 24*0 + 32))\\
+      g_{x_2}'(0,-1) & = ((6*0 + 6*(-1) - 14)*(0 + (-1) + 1)^2 + (2*0 + 2*(-1) + 2)* \\
+      & * (3*0^2 + 6*0*(-1) - 14*0 + 3*(-1)^2 - 14*(-1) + 19))*\\
+      & * ((2*0 - 3*(-1))^2*(12*0^2 - 36*0*(-1) - 32*0 + 27*(-1)^2 + 48*(-1) + 18) + 30) -\\
+      & + ((0 + (-1) + 1)^2*(3*0^2 + 6*0*(-1) - 14*0 + 3*(-1)^2 - 14*(-1) + 19) + 1)*\\
+      & * ((12*0 - 18*(-1))*(12*0^2 - 36*0*(-1) - 32*0 + 27*(-1)^2 + 48*(-1) + 18) -\\
+      & + (2*0 - 3*(-1))^2*(54*(-1) - 36*0 + 48))\\
+    \end{split}
+\end{equation}
+Then simplifying one finds out that for given roots partial derivatives are equal zero
+\begin{equation}
+    \begin{split}
+      g_{x_1}'(0,-1) & = 0\\
+      g_{x_2}'(0,-1) & = 0\\
+    \end{split}
+\end{equation}
+
+What is proving that point (0,-1) is stationary point of objective function $g(x_1,x_2)$.
+
+\end{document}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

@@ -1,0 +1,16 @@
+function [polynomialDerivativeCoefficients] = PolynomialDifferentation(polynomialCoefficients, derivativeOrder)
+
+polynomialDegree = polynomialCoefficients.size();
+%polynomialDerivativeDegree = polynomialDegree - derivativeOrder;
+polynomialDerivativeCoefficients = zeros(polynomialDegree);
+
+for i=derivativeOrder:polynomialDegree
+    a = polynomialCoefficients(i);
+    for j=derivativeOrder
+        b = i*a;
+    end
+    polynomialDerivativeCoefficients{i} = b;
+end
+
+
+end

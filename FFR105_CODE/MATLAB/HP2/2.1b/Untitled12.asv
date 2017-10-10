@@ -1,0 +1,32 @@
+function nearestNeighbourPathLength=GetNearestNeighbourPathLength(cityLocation)
+    nCity=size(cityLocation,1);
+    pathRange = [1, nCity];
+    path=randi(pathRange,50,1);
+    
+    distance=0;
+    
+    while(length(path) ~= nCity)
+        cityLastId = path(end);
+        cityLast = cityLocation(cityLastId);
+        cityNearestNeighbour=inf;
+        
+        for i=1:nCity
+            cityId=cityLocation(i,:);
+            isCityInPath = path == i;
+            
+            tmpBol2=not(any(path(:)==i));
+            if(tmpBol2)
+                cityNeighbourDistance=CartesianDistance(tmpCity2-cityLast);
+                tmpBol1=distanceBetweenNeighbourCities<cityNearestNeighbour;
+                if(tmpBol1)
+                    cityNearestNeighbour=distanceBetweenNeighbourCities;
+                    nearestNeighbourIndex=i;
+                end
+            end
+        end
+        
+        path=[path nearestNeighbourIndex];
+        distance=distance+cityNearestNeighbour;
+    end
+    nearestNeighbourPathLength=distance;
+end

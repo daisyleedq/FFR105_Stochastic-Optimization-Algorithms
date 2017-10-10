@@ -1,0 +1,46 @@
+function [] = ParticleSwarmOptimization(nGenerations, nParticles, positions, ...
+        bestPositionsMatrix, bestPositionEver, velocities, c1, c2,  ...
+    inertiaWeight, positionMax, positionMin, deltaT)
+    
+    crazinessProbability = 1/nParticles;
+    deltaPosition = positionMax-positionMin;
+    velocityMax = deltaPosition / deltaT;
+    
+    %% iterate over generations
+    for k = 1:nGenerations
+        
+        %% 2. Evaluate each particle in the swarm, i.e. compute f (xi), i = 1, . . . , N.
+        functionValues = EvaluateSwarm(positions);
+        functionValuesBestPositions = EvaluateSwarm(bestPositionsMatrix);
+        minimum = EvaluateSwarm(bestPositionEver);
+        
+        %% 3. Update the best position of each particle, and the global best position.
+        % Thus, for all particles pi, i = 1, . . . , N:
+        for i=1:nParticles
+            %% 3.1. update best positions of swarm particles
+            if functionValues(i) < functionValuesBestPositions(i)
+                PlotUpdatePositions(minimaPlotHand,positions);
+                pause(0.01);
+                bestPositionsMatrix(i,:) = positions(i,:);
+            end
+            
+            %% 3.2. update global best position
+            if functionValues(i) < minimum
+                PlotUpdatePositions(minimaPlotHand,positions);
+                pause(0.01);
+                bestPositionEver = positions(i,:);
+            end
+        end
+        
+        %% 4. Update particle velocities and positions
+        velocities = VelocityRestrictedUpdate(positions, velocities, ...
+            bestPositionsMatrix, bestPositionEver, c1, c2, deltaT, inertiaWeight, velocityMax);
+        
+        velocities = VelocityCraziness(velocities, crazinessProbability, velocityMax);
+        positions = PositionUpdate(positions, velocities, deltaT);
+        
+        inertiaWeight = InertiaWeightUpdate(inertiaWeight, beta, lowerBoundInertiaWeight);
+        
+    end
+    
+end

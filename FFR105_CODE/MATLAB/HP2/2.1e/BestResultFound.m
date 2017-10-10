@@ -1,0 +1,13 @@
+clear all;
+clc;
+
+%NNPathLengthCalculator : starting city = 5, nn-path length = 122.7343
+shortestPath=122.7343;
+bestPath=[ 5   4   2   1   9  15  10  11  12   6   3 ...  
+           7   8  13  14  17  16  19  23  26  25  18 ...
+           21  24  31  34  33  39  41  45  42  43  37 ...
+           38  35  27  49  50  44  47  46  48  40  36 ...
+           32  29  30  22  28  20]
+
+
+
